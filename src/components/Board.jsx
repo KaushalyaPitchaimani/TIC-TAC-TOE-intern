@@ -5,18 +5,27 @@ import { useState } from 'react'
 const Board = () => {
     const [squares, setSquares] = useState(Array(9).fill(null));
 
+    const [isNext, setIsNext] = useState(false);
+
+
     console.log(squares)
 
     const handleSquareClick = (clickedPosition) => {
+
+        if (squares[clickedPosition]) {
+            return //here checking if the clicked position is truthy that is not null than come out of the square and disable that square//
+        }
         setSquares((currentSquares) => {
             return currentSquares.map((squareValue, position) => {
                 if (clickedPosition === position) {
-                    return 'X'
+                    return isNext ? 'X' : "O";
                 }
                 return squareValue;
 
             });
         })
+        //true than X false than ), here we ae changing from true to false??//
+        setIsNext(currentIsNext => !currentIsNext)
     };
 
     const renderSquare = position => {
